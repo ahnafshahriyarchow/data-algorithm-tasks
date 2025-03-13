@@ -7,11 +7,11 @@ a Python function named GetPointIndex DC()."""
 
 import time
 def GetPointIndex_naive(A):
-    start_time=time.perf_counter() 
+    start_time=time.perf_counter() #start time measurement
     for i in range(len(A)):
-        if A[i]==i:
-            return True, time.perf_counter()-start_time 
-    return False, time.perf_counter()-start_time  
+        if A[i]==i:    #check if the current index is equal to its value
+            return True, time.perf_counter()-start_time  #return True and elapsed time
+    return False, time.perf_counter()-start_time    #return False if index not found
 
 def GetPointIndex_DC(A):
     def pointer(left,right):
