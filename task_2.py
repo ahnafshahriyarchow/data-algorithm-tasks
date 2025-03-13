@@ -27,6 +27,7 @@ def longest_special_substring(s):
     for i in range(n):
         for j in range(i+1,n+1):
             substring=s[i:j]
+            #if the substring is special and longer than the previously stored one then update it
             if is_special(substring) and len(substring)> len(longest_substring):
                 longest_substring=substring
 
@@ -35,6 +36,7 @@ def longest_special_substring(s):
 def GetLongSpecialSubstring_DC(s):
     return longest_special_substring(s)
 
+#Test cases
 s1 = "FdedDdf"
 res1 = GetLongSpecialSubstring_DC(s1)
 print(f"Longest special substring in '{s1}' is: '{res1}'")
