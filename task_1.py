@@ -15,22 +15,23 @@ def GetPointIndex_naive(A):
 
 def GetPointIndex_DC(A):
     def pointer(left,right):
-        if left>right:
+        if left>right:   # if the search range is invalid, return False
             return False
         
-        mid=(left+right)//2
+        mid=(left+right)//2   #check for the middle index
         
-        if A[mid]==mid:
+        if A[mid]==mid:  #if mid is greater, left half is searched
             return True
         elif A[mid]>mid:
             return pointer(left,mid-1)
-        else:
+        else:            #if mid is smaller, right half is searched
             return pointer(mid+1,right)
     
     start_time=time.perf_counter()  
-    res=pointer(0, len(A)-1)
-    return res,time.perf_counter()-start_time  
+    res=pointer(0, len(A)-1)  #recursive function called 
+    return res,time.perf_counter()-start_time   #return result and execution time
 
+# Test cases
 A=[-3, 0, 1, 5, 7, 9, 11]
 bool_val_naive,runtime_naive=GetPointIndex_naive(A)
 print(f"For Naive method: bool_val={bool_val_naive}, runtime={runtime_naive:10f}")
