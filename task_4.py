@@ -22,43 +22,47 @@ FindAllStableMatchings() that returns the total number of stable matchings."""
 
 def Orders(Array,Start,End):
     if not Start:
-        Array.append(End)
+        Array.append(End)  #add permutation to the list when no element left to permute
     else:
         n=len(Start)
         for i in range(n):
-            NextEnd=End+[Start[i]]  
-            NextStart=Start[:i]+Start[i+1:]  
+            NextEnd=End+[Start[i]]   #add current element to the permutation
+            NextStart=Start[:i]+Start[i+1:]  #remove the used element and continue
             Orders(Array,NextStart,NextEnd)  
+            
 def is_stable(match, MenPref, WomenPref):
     n=len(match)
-   
+    
+    #woman_for_man stores assigned woman for each man and man_for_woman stores assigned man for each woman
     woman_for_man=match
     man_for_woman=[0]*n
     for man,woman in enumerate(match):
         man_for_woman[woman]=man
-    
+        
+     #check stability conditions for each man-woman pair
     for m in range(n):
         for w in range(n):
-            current_woman=woman_for_man[m]
-            current_man=man_for_woman[w]
+            current_woman=woman_for_man[m]   #woman currently assigned to man m
+            current_man=man_for_woman[w]     #man currently assigned to woman w
             
             if MenPref[m].index(w)<MenPref[m].index(current_woman):
                 if WomenPref[w].index(m)<WomenPref[w].index(current_man):
-                    return False
-    return True
+                    return False             #instability found
+    return True         #instability not found
 
 def FindAllStableMatchings(MenPref,WomenPref):
     n=len(MenPref)
-    all_matches = []
-    Orders(all_matches,list(range(n)), [])
+    all_matches = []  #stores all possible matchings
+    Orders(all_matches,list(range(n)), []) #generate all possible matchings
     
-    stable_count = 0
+    stable_count = 0 # Counter for stable matchings
     for match in all_matches:
-        if is_stable(match,MenPref,WomenPref):
-            stable_count+=1
+        if is_stable(match,MenPref,WomenPref): 
+            stable_count+=1  #increment count if the matching is stable
             
     return stable_count
-
+    
+#Test case
 MenPref = [
     [5, 6, 4, 2, 0, 3, 1],
     [0, 5, 1, 2, 4, 3, 6],
