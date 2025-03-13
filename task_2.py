@@ -6,21 +6,24 @@ recursive Python function named GetLongSpecialSubstring DC() to perform this tas
 1 ≤ len(s) ≤ 100, and s only contains upper and lower case from English language."""
 
 def is_special(substring):
-    lower_alphabetset=set()
+    #stores all lowercase and uppercase letters found in the substring
+    lower_alphabetset=set() 
     upper_alphabetset=set()
     
+    #iterate through the substring to separate lowercase and uppercase letter
     for char in substring:
         if char.islower():
             lower_alphabetset.add(char)
         elif char.isupper():
             upper_alphabetset.add(char)
-
+    #checking if each lowercase letter has its uppercase counterpart and vice versa
     return all(char.upper() in upper_alphabetset for char in lower_alphabetset) and all(char.lower() in lower_alphabetset for char in upper_alphabetset)
 
 def longest_special_substring(s):
     n=len(s)
-    longest_substring=""
-
+    longest_substring=""  #variable declared to store the longest special substring
+    
+    #generating all possible substrings using two nested loops
     for i in range(n):
         for j in range(i+1,n+1):
             substring=s[i:j]
