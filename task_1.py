@@ -31,7 +31,7 @@ def GetPointIndex_DC(A):
     res=pointer(0, len(A)-1)  #recursive function called 
     return res,time.perf_counter()-start_time   #return result and execution time
 
-# Test cases
+#Test cases
 A=[-3, 0, 1, 5, 7, 9, 11]
 bool_val_naive,runtime_naive=GetPointIndex_naive(A)
 print(f"For Naive method: bool_val={bool_val_naive}, runtime={runtime_naive:10f}")
